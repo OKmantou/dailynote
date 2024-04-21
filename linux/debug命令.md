@@ -12,7 +12,10 @@
 
   ip route show 12.103.48.0/24
 
+### ip -s show ens33
 
+- -s：统计
+- overrun-溢出，collsns-通信碰撞
 
 ### ip addr
 
