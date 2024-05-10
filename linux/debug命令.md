@@ -171,11 +171,22 @@ https://itnext.io/from-rss-to-wss-navigating-the-depths-of-kubernetes-memory-met
 > 共享内存（shared memory）：操作系统为多个进程分配同一块内存区，多个进程可以通过互斥的读写共享内存来实现进程通信。通常用于多进程的数据交换、进程间同步。
 >
 >
+> 
 > 交换空间（swap memory）：操作系统级别的磁盘（单独的swap磁盘），由所有进程共享同一块交换空间。
+> 
 >
 > 交换缓存内存（swap cache memory）：进程在物理内存中被交换出后，存储在内核中的缓存区域。当进程需要访问被交换出的页面时，可以首先从Swap Cache Memory中读取，而无需访问较慢的磁盘交换空间。
+>
+> 
+>
+>
+> 活跃文件（active file）：在linux中，os会将进程读写的文件缓存在os内存中，当进程访问两次该文件对应的内存区时，os会将该内存区标记为active file。该部分内存不会被算在进程的rss中。
+>
+> 不活跃文件（inactive file）：进程只访问一次的文件内存。
+>
+> 
 
-- RSS：resident memory size，驻留在物理内存的数量，由os提供。The amount of anonymous and swap cache memory
+- RSS：resident memory size，驻留在物理内存的数量，由os提供。包括堆栈、mmap。The amount of anonymous and swap cache memory(not swap space).
 
 - WSS：work set size，进程当前活动（指经常访问，不包括不常访问的内存，即使它驻留在物理内存中；也包括驻留在磁盘的内存）的内存，通过页面访问的频率动态测算。可以用来评估进程的活动内存需求和性能特征。
 
