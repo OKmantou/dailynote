@@ -15,10 +15,6 @@
 
 **开源Nginx地址**：https://nginx.org
 
-**源码内容：**
-
-<img src="C:\Users\OK馒头\AppData\Roaming\Typora\typora-user-images\image-20231114170636076.png" alt="image-20231114170636076" style="zoom:67%;" />
-
 ### **部署过程：**
 
 1. 在/user/local/目录下下载nginx源码包并解压
@@ -147,6 +143,8 @@ ngx_http_core_module
 ### 虚拟主机与请求的分发
 
 http模块中，每个server就是一个虚拟主机。虚拟主机可以是一个域名，多个域名可以对应于同一个IP（IP有限）。nginx可以通过不同的域名做出不同的响应（根据请求头中的host字段）。
+
+处理http请求时，nginx会取出header中的Host，与每个server_name匹配，由此决定由哪个server来处理
 
 ```
 server{
