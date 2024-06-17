@@ -79,7 +79,7 @@ show parameter pfile;
 
 ### 数据库实例
 
-数据库实例是访问数据库必须的：计算机内存+辅助处理后台进程。进程使用的内存也叫做SGA。数据库实例是数据库的<u>运行时环境</u>，负责管理数据库的物理和逻辑资源，以及处理用户的请求。
+数据库实例是访问数据库必须的：<u>计算机内存+辅助处理后台</u>进程。进程使用的内存也叫做SGA。数据库实例是数据库的<u>运行时环境</u>，负责管理数据库的物理和逻辑资源，以及处理用户的请求。
 
 实例名是用于响应某个数据库操作的数据库管理系统名称，叫做系统标识（System Identifier，SID），用于在网络中表示数据库实例，由参数instance_name决定。一个数据库可以有多个实例。
 
@@ -90,7 +90,15 @@ select instance_name from v$instance;
 
 开发程序连接时使用（jdbc:oracle:thin:@localhost:1521:**orcl**），其中orcl就是实例名。
 
-![img](https://docs.oracle.com/en/database/oracle/oracle-database/19/cncpt/img/cncpt223.gif)
+<img src="https://docs.oracle.com/en/database/oracle/oracle-database/19/cncpt/img/cncpt223.gif" alt="img" style="zoom:67%;" />
+
+**SGA**
+
+所有用户都可以访问的共享内存区
+
+ **PGA**
+
+针对特定服务器进程访问的内存区
 
 #### 内存区
 
@@ -121,10 +129,11 @@ program global area是一个非共享的内存区，是用户进程链接到实�
 
 后台进程是实例启动时就创建的，用来维护实例运行时的状态。主要包括：
 
-- DBWn：数据库写进程
+- DBWn：数据库写进程。将数据告诉缓冲区中的脏缓冲区中的数据写到数据文件中
 - CKPT：：检查点进程
 - LGWR：日志写进程
-- PMON、SMON：监控进程
+- PMON：监控服务器进程，当某个服务器进程奔溃后，PMON进程负责回滚用户当前事务、释放用户所占用的锁、释放其他资源
+- SMON：监控进程，实例恢复
 
 ### 表空间
 
