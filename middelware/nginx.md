@@ -24,18 +24,7 @@
 1. 在/user/local/目录下下载nginx源码包并解压
 2. 执行configure，进行编译前配置
 3. 在/user/local/nginx-1.xx.x/目录下执行make和make install
-4. 在/usr/local/目录下产生nginx目录，拥有下列目录
-   - /conf
-     - nginx.conf：
-   - /html
-     - 50x.html：
-     - index.html:
-   - /logs
-     - access.log
-     - error.log
-     - nginx.pid
-   - /sbin
-     - **nginx**
+4. 在/usr/local/目录下产生nginx目录
 
 ### **conf目录**
 
@@ -48,7 +37,8 @@
 > 1. 效率：前者效率高，会多路复用，在一个持久连接上处理多个请求。scgi每个请求都会建立和关闭
 > 2. 移植性：后者简单、移植性更高
 
-- mime.types
+- mime.types：nginx根据请求的文件扩展名（如.html）来设置响应的Content-Type，以便让客户端正确解析文件类型。
+- nginx.conf
 
 ### **常用命令**
 
@@ -117,6 +107,15 @@
     - upstream
   
       负载均衡器设置
+
+### 代理设置
+
+- remote_addr：代理服务器的IP，nginx默认设置为请求到达的上一个ip
+- x_real_ip：和自己直接相连的ip，通常是remote_addr
+- http_x_forwarded_for：客户端设置的x_forwarded_for请求头中的ip，可以根据该变量确定请求经过的服务器。该值仅仅上上游传过来的值，不会添加本级的ip
+- proxy_add_x_forwarded_for：上游ip+本级ip
+- 
+- http_referer：用户从哪个链接请求过来
 
 ### location路径映射
 

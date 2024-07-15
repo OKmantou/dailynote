@@ -22,7 +22,17 @@
    # awk '(pattern) { action }' file
    ```
 
+4. 从第二行开始，将第四列的内容叠加
+
+   ```
+   awk 'NR > 1{sum += $4} END {print sum}'
+   ```
+
    
+
+
+
+
 
 ## sed
 
