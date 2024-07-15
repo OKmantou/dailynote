@@ -16,7 +16,10 @@
 
   ip route get ip
 
+### ip -s show ens33
 
+- -s：统计
+- overrun-溢出，collsns-通信碰撞
 
 ### ip addr
 
